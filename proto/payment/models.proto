@@ -1,11 +1,24 @@
 syntax = "proto3";
 
-package shop;
+package payment;
 
 option go_package = "github.com/shubamakabra/MagnusBox/golang/payment";
 
 message Customer {
   string id = 1;
-  string name = 2;
-  float money_spent = 3;
+  repeated Order order_histoty = 2;
 }
+
+message Order {
+  string id = 1;
+  string customer_id = 2;
+  repeated Item items = 3;
+  float total = 4;
+}
+
+message Item {
+  string id = 1;
+  string name = 2;
+  float price = 3;
+}
+

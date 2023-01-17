@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a152ee92-9575-44f0-a145-d9ac899d6609" name="Changes" comment="sup">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proto/common/communications.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proto/shop/models.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proto/shop/public_services.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/payment/models.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/payment/models.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/payment/public_services.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/payment/public_services.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

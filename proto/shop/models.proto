@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package shop;
+
+option go_package = "github.com/shubamakabra/MagnusBox/golang/shop";
+
+message Customer {
+  string id = 1;
+  string name = 2;
+  float money_spent = 3;
+}
