@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package people.public;
+
+option go_package = "github.com/shubamakabra/MagnusBox/golang/people";
+
+service Person {
+  rpc GetPerson(GetPersonRequest) returns (GetPersonResponse);
+  rpc GetNumber(GetNumberRequest) returns (GetNumberResponse);
+}
+
+message GetPersonRequest{
+  string id = 1;
+}
+
+message GetPersonResponse{
+  oneof result{
+    people.Person person = 1;
+    common.Error error = 2;
+  }
+}
+
+message GetNumberRequest{
+  string id = 1;
+}
+
+message GetNumberResponse{
+  oneof result {
+    people.Number number = 1;
+    common.Error error = 2;
+  }
+}

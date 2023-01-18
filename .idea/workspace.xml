@@ -4,13 +4,29 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a152ee92-9575-44f0-a145-d9ac899d6609" name="Changes" comment="sup">
-      <change afterPath="$PROJECT_DIR$/proto/common/communications.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proto/shop/models.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proto/shop/public_services.proto" afterDir="false" />
+    <list default="true" id="a152ee92-9575-44f0-a145-d9ac899d6609" name="Changes" comment="feat: Implemented customer, order and communication proto files">
+      <change afterPath="$PROJECT_DIR$/book.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/app/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/golang/people/person.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/file/FileHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/shop/controller.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/shop/customer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proto/common/common.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proto/people/person.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proto/people/public_services.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/payment/models.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/payment/models.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/payment/public_services.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/payment/public_services.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/golang/common/communications.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/golang/payment/models.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/golang/payment/public_services.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/golang/payment/public_services_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/golang/shop/models.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/golang/shop/public_services.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/golang/shop/public_services_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/common/communications.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/payment/models.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/payment/public_services.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/shop/models.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/shop/public_services.proto" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,36 +48,50 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2KP7ggw1Fq9IltlCs8lM8zYAH07" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;configurable..is.expanded&quot;: &quot;false&quot;,
-    &quot;configurable.GoLibrariesConfigurable.is.expanded&quot;: &quot;true&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/shubamakabra/repos/go/MagnusBox&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;go.sdk&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "configurable..is.expanded": "false",
+    "configurable.GoLibrariesConfigurable.is.expanded": "true",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/Users/shubamakabra/repos/go/MagnusBox",
+    "settings.editor.selected.configurable": "go.sdk"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/proto/people" />
+      <recent name="$PROJECT_DIR$/pkg" />
       <recent name="$PROJECT_DIR$/proto/payment" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Build.go build main.go">
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="MagnusBox" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <package value="github.com/shubamakabra/MagnusBox" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/cmd/app/main.go" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build " type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="MagnusBox" />
       <working_directory value="$PROJECT_DIR$" />
@@ -70,6 +100,11 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build main.go" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
@@ -87,9 +122,11 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="fix: oppsieotpiejrtpiewjtpoirphpioehidsfhijpodifjhpoisdhpoisdfhpijsdfphijsdpritjpwiut+034hy+0q34h´´0hij3rí" />
     <MESSAGE value="sup" />
-    <option name="LAST_COMMIT_MESSAGE" value="sup" />
+    <MESSAGE value="feat: Implemented customer, order and communication proto files" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Implemented customer, order and communication proto files" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
