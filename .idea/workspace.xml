@@ -4,29 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a152ee92-9575-44f0-a145-d9ac899d6609" name="Changes" comment="feat: Implemented customer, order and communication proto files">
-      <change afterPath="$PROJECT_DIR$/book.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/app/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/golang/people/person.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/file/FileHandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/shop/controller.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/shop/customer.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proto/common/common.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proto/people/person.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proto/people/public_services.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/golang/common/communications.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/golang/payment/models.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/golang/payment/public_services.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/golang/payment/public_services_grpc.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/golang/shop/models.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/golang/shop/public_services.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/golang/shop/public_services_grpc.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/common/communications.proto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/payment/models.proto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/payment/public_services.proto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/shop/models.proto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/shop/public_services.proto" beforeDir="false" />
+    <list default="true" id="a152ee92-9575-44f0-a145-d9ac899d6609" name="Changes" comment="fix: just breaking things">
+      <change beforePath="$PROJECT_DIR$/proto/people/public_services.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/people/public_services.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +105,8 @@
     <MESSAGE value="fix: oppsieotpiejrtpiewjtpoirphpioehidsfhijpodifjhpoisdhpoisdfhpijsdfphijsdpritjpwiut+034hy+0q34h´´0hij3rí" />
     <MESSAGE value="sup" />
     <MESSAGE value="feat: Implemented customer, order and communication proto files" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Implemented customer, order and communication proto files" />
+    <MESSAGE value="fix: just breaking things" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: just breaking things" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

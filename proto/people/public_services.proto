@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package people.public;
 
+import "proto/people/person.proto";
+import "proto/common/common.proto";
+
 option go_package = "github.com/shubamakabra/MagnusBox/golang/people";
 
 service Person {
@@ -26,7 +29,7 @@ message GetNumberRequest{
 
 message GetNumberResponse{
   oneof result {
-    people.Number number = 1;
+    people.Person.PhoneNumber number = 1;
     common.Error error = 2;
   }
 }
