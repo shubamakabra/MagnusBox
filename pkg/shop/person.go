@@ -1,7 +1,8 @@
 package shop
 
-type Customer struct {
+type Person struct {
 	ID        string
 	PaymentID string
 	Name      string
+	Phone     string
 }

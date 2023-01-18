@@ -22,7 +22,7 @@ message Person {
     PhoneType type = 2;
   }
 
-  repeated PhoneNumber phones = 4;
+  PhoneNumber phone = 4;
   google.protobuf.Timestamp last_updated = 5;
 }
 

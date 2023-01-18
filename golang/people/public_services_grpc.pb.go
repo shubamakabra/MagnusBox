@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type PersonClient interface {
 	GetPerson(ctx context.Context, in *GetPersonRequest, opts ...grpc.CallOption) (*GetPersonResponse, error)
 	GetNumber(ctx context.Context, in *GetNumberRequest, opts ...grpc.CallOption) (*GetNumberResponse, error)
+	MakePerson(ctx context.Context, in *MakePersonRequest, opts ...grpc.CallOption) (*MakePersonResponse, error)
 }
 
 type personClient struct {
@@ -52,12 +53,22 @@ func (c *personClient) GetNumber(ctx context.Context, in *GetNumberRequest, opts
 	return out, nil
 }
 
+func (c *personClient) MakePerson(ctx context.Context, in *MakePersonRequest, opts ...grpc.CallOption) (*MakePersonResponse, error) {
+	out := new(MakePersonResponse)
+	err := c.cc.Invoke(ctx, "/people.public.Person/MakePerson", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PersonServer is the server API for Person service.
 // All implementations must embed UnimplementedPersonServer
 // for forward compatibility
 type PersonServer interface {
 	GetPerson(context.Context, *GetPersonRequest) (*GetPersonResponse, error)
 	GetNumber(context.Context, *GetNumberRequest) (*GetNumberResponse, error)
+	MakePerson(context.Context, *MakePersonRequest) (*MakePersonResponse, error)
 	mustEmbedUnimplementedPersonServer()
 }
 
@@ -70,6 +81,9 @@ func (UnimplementedPersonServer) GetPerson(context.Context, *GetPersonRequest) (
 }
 func (UnimplementedPersonServer) GetNumber(context.Context, *GetNumberRequest) (*GetNumberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetNumber not implemented")
+}
+func (UnimplementedPersonServer) MakePerson(context.Context, *MakePersonRequest) (*MakePersonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MakePerson not implemented")
 }
 func (UnimplementedPersonServer) mustEmbedUnimplementedPersonServer() {}
 
@@ -120,6 +134,24 @@ func _Person_GetNumber_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Person_MakePerson_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MakePersonRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PersonServer).MakePerson(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/people.public.Person/MakePerson",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PersonServer).MakePerson(ctx, req.(*MakePersonRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Person_ServiceDesc is the grpc.ServiceDesc for Person service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -134,6 +166,10 @@ var Person_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetNumber",
 			Handler:    _Person_GetNumber_Handler,
+		},
+		{
+			MethodName: "MakePerson",
+			Handler:    _Person_MakePerson_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

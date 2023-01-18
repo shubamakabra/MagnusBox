@@ -10,6 +10,8 @@ option go_package = "github.com/shubamakabra/MagnusBox/golang/people";
 service Person {
   rpc GetPerson(GetPersonRequest) returns (GetPersonResponse);
   rpc GetNumber(GetNumberRequest) returns (GetNumberResponse);
+  rpc AddPerson(AddPersonRequest) returns (AddPersonResponse);
+  rpc GetPersonFromNumber(GetPersonFromNumberRequest) returns (GetPersonFromNumberResponse);
 }
 
 message GetPersonRequest{
@@ -23,6 +25,18 @@ message GetPersonResponse{
   }
 }
 
+message GetPersonFromNumberRequest {
+  int32 number = 1;
+}
+
+message GetPersonFromNumberResponse {
+  oneof result {
+    people.Person.PhoneNumber number = 1;
+    common.Error error = 2;
+  }
+}
+
+
 message GetNumberRequest{
   string id = 1;
 }
@@ -30,6 +44,18 @@ message GetNumberRequest{
 message GetNumberResponse{
   oneof result {
     people.Person.PhoneNumber number = 1;
+    common.Error error = 2;
+  }
+}
+
+message AddPersonRequest{
+  string id = 1;
+  string number = 2;
+}
+
+message AddPersonResponse{
+  oneof result {
+    bool ok = 1;
     common.Error error = 2;
   }
 }

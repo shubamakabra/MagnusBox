@@ -2,80 +2,121 @@ package shop
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"math/rand"
 	"strconv"
-	"time"
 
+	commonpb "github.com/shubamakabra/MagnusBox/golang/common"
 	peoplepb "github.com/shubamakabra/MagnusBox/golang/people"
-	shoppb "github.com/shubamakabra/MagnusBox/golang/shop"
+	"github.com/shubamakabra/MagnusBox/pkg/structs"
 )
 
 type Controller struct {
-	shoppb.UnimplementedCustomerServer
-	peoplepb.UnimplementedCustomerServer
-	pc payment.Client
+	peoplepb.UnimplementedPersonServer
 }
 
 func NewController() *Controller {
 	return &Controller{}
 }
 
-func (c Controller) GetCustomer(ctx context.Context, request *shoppb.GetCustomerRequest) (*shoppb.GetCustomerResponse, error) {
+func (c Controller) GetPerson(ctx context.Context, request *peoplepb.GetPersonRequest) (*peoplepb.GetPersonResponse, error) {
 	RID := request.GetId()
-
-	fmt.Println("1")
 
 	if RID == "404" {
 		e := &commonpb.Error{
 			Status:  "404",
 			Message: "Very much errored",
 		}
-		result := &shoppb.GetCustomerResponse_Error{Error: e} // note this here <------------------------------
-		response := &shoppb.GetCustomerResponse{Result: result}
+		result := &peoplepb.GetPersonResponse_Error{Error: e}
+		response := &peoplepb.GetPersonResponse{Result: result}
 		return response, nil
 	}
-	pcr := MakeMockCustomer()
 
-	var total float32
-	for _, o := range pc.GetOrderHistory() {
-		total = total + o.GetTotal()
+	var person Person
+	result := &peoplepb.GetPersonResponse_Person{}
+	for _, p := range structs.MockPeople {
+		if strconv.Itoa(int(p.Id)) == RID {
+			fmt.Println("Found person!" + person.Name)
+
+			person, err := personToPB(Person{
+				ID:    RID,
+				Name:  p.Name,
+				Phone: p.Phone.GetNumber(),
+			})
+			if err != nil {
+				fmt.Print("errored as a frick")
+			}
+
+			result = &peoplepb.GetPersonResponse_Person{Person: person}
+			break
+		}
 	}
 
-	cus := customerToPB(Customer{
-		ID:        RID,
-		PaymentID: "benis",
-		Name:      "no pls",
-	}, total)
-	result := &shoppb.GetCustomerResponse_Customer{Customer: cus}
-	response := &shoppb.GetCustomerResponse{Result: result}
+	response := &peoplepb.GetPersonResponse{Result: result}
 	return response, nil
 }
 
-func (c *Controller) CreateNewCustomer(ctx context.Context, in *shoppb.Customer) (*shoppb.Customer, error) {
-	log.Printf("recieved: %v", in.Name)
-	var user_id string = string(rand.Intn(1000))
-	return &shoppb.Customer{Name: in.Name, Id: user_id, MoneySpent: in.MoneySpent}, nil
+func (c Controller) GetNumber(ctx context.Context, request *peoplepb.GetNumberRequest) (*peoplepb.GetNumberResponse, error) {
+	RID := request.GetId()
+
+	if RID == "404" {
+		e := &commonpb.Error{
+			Status:  "404",
+			Message: "Very much errored",
+		}
+		result := &peoplepb.GetNumberResponse_Error{Error: e}
+		response := &peoplepb.GetNumberResponse{Result: result}
+		return response, nil
+	}
+
+	result := &peoplepb.GetNumberResponse_Number{}
+	for _, p := range structs.MockPeople {
+
+		if strconv.Itoa(int(p.Id)) == RID {
+
+			if p.Phone.GetNumber() == "" {
+
+				return nil, errors.New("Could not find phone number for " + p.Name)
+			} else {
+				fmt.Println("And their number: " + p.Phone.GetNumber())
+			}
+
+			nr, err := strconv.Atoi(p.Phone.GetNumber())
+			if err != nil {
+				return nil, errors.New("Could not convert number to string....?")
+			}
+
+			result = &peoplepb.GetNumberResponse_Number{Number: numberToPB(nr)}
+			break
+		}
+	}
+
+	response := &peoplepb.GetNumberResponse{Result: result}
+	return response, nil
 }
 
-func MakeMockCustomer() Customer {
-	rand.Seed(time.Now().UnixNano())
-	id := rand.Intn(1000)
-	pid := rand.Intn(1000)
-	names := [5]string{"hans", "karl", "nanna", "dieter", "loeffe"}
-	c := Customer{
-		ID:        strconv.Itoa(id),
-		PaymentID: strconv.Itoa(pid),
-		Name:      names[rand.Intn(5)],
-	}
-	return c
+func (c *Controller) CreateNewCustomer(ctx context.Context, in *peoplepb.Person) (*peoplepb.Person, error) {
+	log.Printf("recieved: %v", in.Name)
+	var user_id int32 = int32(rand.Intn(1000))
+	return &peoplepb.Person{Name: in.Name, Id: user_id, Phone: in.Phone}, nil
 }
-func customerToPB(input Customer, total float32) *shoppb.Customer {
-	r := &shoppb.Customer{
-		Id:         input.ID,
-		Name:       input.Name,
-		MoneySpent: total,
+
+func numberToPB(input int) *peoplepb.Person_PhoneNumber {
+	return &peoplepb.Person_PhoneNumber{Number: strconv.Itoa(input)}
+}
+
+func personToPB(input Person) (*peoplepb.Person, error) {
+	id, err := strconv.Atoi(input.ID)
+	if err != nil {
+		return nil, err
 	}
-	return r
+
+	r := &peoplepb.Person{
+		Id:    int32(id),
+		Name:  input.Name,
+		Phone: &peoplepb.Person_PhoneNumber{Number: input.Phone},
+	}
+	return r, nil
 }
